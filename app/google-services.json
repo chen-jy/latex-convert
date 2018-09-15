@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "305281425085",
+    "firebase_url": "https://latex-htn.firebaseio.com",
+    "project_id": "latex-htn",
+    "storage_bucket": "latex-htn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305281425085:android:e106dd020f2aae9a",
+        "android_client_info": {
+          "package_name": "latex.htn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305281425085-7nb5sc8sembpcb6rd00d41ie3br1rdfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUW-ox3OfUSuJr0KwIfHeu6TmhJ-Ji29I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
