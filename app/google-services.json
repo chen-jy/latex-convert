@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "684955792208",
+    "firebase_url": "https://latexconvert-19d31.firebaseio.com",
+    "project_id": "latexconvert-19d31",
+    "storage_bucket": "latexconvert-19d31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684955792208:android:2304185ecb8bf2a0",
+        "android_client_info": {
+          "package_name": "com.htn.latexconvert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684955792208-a7ngn1ulc8dl4tj078cg91aqvh3ta5rg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRiuLz2Sxm0Klz5L-zucbivzTiwma7CvU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
