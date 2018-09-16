@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity { //implements AdapterView.OnItemSelectedListener {
     public static final String[] OPERATIONS = {"+", "-", "x", "*", "÷"};
     public static final String[] RELATIONS = {"=", "≤", "≥"};
     public static final String[] SETS =	{"∩", "∪", "∈", "∉"};
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             e.printStackTrace();
         }
 
-        initiateConversion(getFilesDir() + "output.txt");
+        initiateConversion(getFilesDir() + "\\output.txt");
     }
 
     /**
@@ -312,48 +312,48 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return new Pair<>(targetWidth, targetHeight);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        mGraphicOverlay.clear();
-        switch (position) {
-            case 0:
-                mSelectedImage = getBitmapFromAsset(this, "Please_walk_on_the_grass.jpg");
+//    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+//        mGraphicOverlay.clear();
+//        switch (position) {
+//            case 0:
+//                mSelectedImage = getBitmapFromAsset(this, "Please_walk_on_the_grass.jpg");
+//
+//                break;
+//            case 1:
+//                // Whatever you want to happen when the second item gets selected
+//                mSelectedImage = getBitmapFromAsset(this, "non-latin.jpg");
+//                break;
+//            case 2:
+//                // Whatever you want to happen when the thrid item gets selected
+//                mSelectedImage = getBitmapFromAsset(this, "nl2.jpg");
+//                break;
+//        }
+//        if (mSelectedImage != null) {
+//            // Get the dimensions of the View
+//            Pair<Integer, Integer> targetedSize = getTargetedWidthHeight();
+//
+//            int targetWidth = targetedSize.first;
+//            int maxHeight = targetedSize.second;
+//
+//            // Determine how much to scale down the image
+//            float scaleFactor =
+//                    Math.max(
+//                            (float) mSelectedImage.getWidth() / (float) targetWidth,
+//                            (float) mSelectedImage.getHeight() / (float) maxHeight);
+//
+//            Bitmap resizedBitmap =
+//                    Bitmap.createScaledBitmap(
+//                            mSelectedImage,
+//                            (int) (mSelectedImage.getWidth() / scaleFactor),
+//                            (int) (mSelectedImage.getHeight() / scaleFactor),
+//                            true);
+//
+//            mImageView.setImageBitmap(resizedBitmap);
+//            mSelectedImage = resizedBitmap;
+//        }
+//    }
 
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "non-latin.jpg");
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "nl2.jpg");
-                break;
-        }
-        if (mSelectedImage != null) {
-            // Get the dimensions of the View
-            Pair<Integer, Integer> targetedSize = getTargetedWidthHeight();
-
-            int targetWidth = targetedSize.first;
-            int maxHeight = targetedSize.second;
-
-            // Determine how much to scale down the image
-            float scaleFactor =
-                    Math.max(
-                            (float) mSelectedImage.getWidth() / (float) targetWidth,
-                            (float) mSelectedImage.getHeight() / (float) maxHeight);
-
-            Bitmap resizedBitmap =
-                    Bitmap.createScaledBitmap(
-                            mSelectedImage,
-                            (int) (mSelectedImage.getWidth() / scaleFactor),
-                            (int) (mSelectedImage.getHeight() / scaleFactor),
-                            true);
-
-            mImageView.setImageBitmap(resizedBitmap);
-            mSelectedImage = resizedBitmap;
-        }
-    }
-
-    @Override
+    //@Override
     public void onNothingSelected(AdapterView<?> parent) {
         // Do nothing
     }
@@ -384,7 +384,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     /**
      * Once a normal text file has been created, pass it here to complete the operation and
      * generate a LaTeX file.
-     * @param fileName
+     * @param fileName cwd
      */
     public void initiateConversion(String fileName) {
         Context context = this;
