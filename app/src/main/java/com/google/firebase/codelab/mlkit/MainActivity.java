@@ -3,8 +3,12 @@
 
 package com.google.firebase.codelab.mlkit;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +16,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +46,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -120,6 +129,9 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         if (requestCode == 1) {
             Bitmap imageData = (Bitmap)data.getExtras().get("data");
             runCloudTextRecognition(imageData);
+            // TODO: Supply a dummy image
+//            Bitmap b = getBitmapFromAsset(this, "Please_walk_on_the_grass.jpg");
+//            runCloudTextRecognition(b);
 
 //            MediaStore.Images.Media.insertImage(getContentResolver(), imageData, "scanned",
 //                    "scanned copy"); // This doesn't work (check this)
@@ -209,7 +221,13 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
                             public void onSuccess(FirebaseVisionDocumentText texts) {
 //                                mCloudButton.setEnabled(true);
                                 processCloudTextRecognitionResult(texts);
-                                showToast("Image converted!");
+
+                                if (texts == null) {
+                                    showToast("No text detected!");
+                                }
+                                else {
+                                    showToast("Image converted!");
+                                }
                             }
                         })
                 .addOnFailureListener(
@@ -259,7 +277,7 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
             e.printStackTrace();
         }
 
-        initiateConversion(getFilesDir() + "\\output.txt");
+        initiateConversion(getFilesDir() + "/output.txt");
     }
 
     /**
@@ -451,15 +469,37 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
      * @param dir
      * @param tex_file_name
      */
+    @TargetApi(23)
     public void writeFile(String dir, String tex_file_name) {
-        dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(dir + "\\" + tex_file_name + ".tex", false);
-            writer.write(math, 0, math.length());
-            writer.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Log.v(TAG,"Permission is granted");
+            dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+
+            try {
+                FileOutputStream fos = new FileOutputStream(new File(dir, tex_file_name + ".txt"));
+                PrintWriter printWriter = new PrintWriter(fos);
+
+                printWriter.println(math);
+                printWriter.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+
+            try {
+                FileOutputStream fos = new FileOutputStream(new File(dir, tex_file_name + ".txt"));
+                PrintWriter printWriter = new PrintWriter(fos);
+
+                printWriter.println(math);
+                printWriter.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
