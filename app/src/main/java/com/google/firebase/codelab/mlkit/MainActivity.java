@@ -6,7 +6,9 @@ package com.google.firebase.codelab.mlkit;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -85,12 +87,33 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
         //=========================================================================================
 
         Button btnCamera = (Button)findViewById(R.id.btnCamera);
+        Button btnAbout = (Button)findViewById(R.id.btnAbout);
 
         btnCamera.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 1);
+            }
+        });
+
+
+        btnAbout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                builder.setMessage("Photo2Tex V1.0 Alpha\n" +
+                        "Team members: \n" +
+                        "Jimmy Yijia Chen\n" +
+                        "Welson Wei\n" +
+                        "Lunyu Li\n" +
+                        "Tianquan Di")
+                        .setTitle("About");
+
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
             }
         });
 
@@ -120,6 +143,8 @@ public class MainActivity extends AppCompatActivity { //implements AdapterView.O
 //        dropdown.setAdapter(adapter);
 //        dropdown.setOnItemSelectedListener(this);
     }
+
+
 
     //=============================================================================================
 
